@@ -115,11 +115,17 @@ class App extends React.Component {
     if(this.state.previousIndex !== -1)
     {
       if(jumbeledArray[index].CLUE === jumbeledArray[previousIndex].CLUE){
-        jumbeledArray[index].ISDISABLED = true;
-        jumbeledArray[previousIndex].ISDISABLED = true;
         this.setState({
           previousIndex: -1,
           jumbeledArray: jumbeledArray
+        }, () => {
+            setTimeout(() => {
+              jumbeledArray[index].ISDISABLED = true;
+              jumbeledArray[previousIndex].ISDISABLED = true;
+              this.setState({
+                jumbeledArray: jumbeledArray
+              });
+            }, 500);
         });
       }else{
         jumbeledArray[index].ISFLIPPED = true;
@@ -159,7 +165,7 @@ class App extends React.Component {
                         <div class="flip-box-front">
                           <h2>&nbsp;</h2>
                         </div>
-                        <div class="flip-box-back">
+                        <div class={"flip-box-back" + (data.ISDISABLED ? " found" : "")}>
                           <h2>{data.CLUE}</h2>
                         </div>
                       </div>

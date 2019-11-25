@@ -103,6 +103,10 @@ body {
   transform: rotateY(180deg);
 }
 
+.flip-box-back.found {
+  background-color: lightblue;
+}
+
 /* Position the front and back side */
 .flip-box-front, .flip-box-back {
   position: absolute;
