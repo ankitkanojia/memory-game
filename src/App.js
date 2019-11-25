@@ -27,18 +27,17 @@ class App extends React.Component {
       <div className="App">
         <div class="container">
           <div class="row">
-            <div class="col-md-8 red">
-              <section class="container">
-                <div onClick={this.flip} class={"card" + (this.state.isFliped ? " flipped" : "")}>
-                  <div class="front">&nbsp;</div>
-                  <div class="back">
-                    <img src={logo} alt="s" />
-                  </div>
+            <div className="col-md-9">
+              <div className="row">
+                <div className="col-md-12 contentBox d-flex justify-content-center align-items-center align-content-around flex-wrap">
+                  {[...Array(24)].map((data) => {
+                    return <div className="flipblock">&nbsp;</div>
+                  })}
                 </div>
-              </section>
+              </div>
             </div>
-            <div className="col-md-4 pink">
-              &nbsp;
+            <div className="col-md-3 sblock">
+                &nbsp;
             </div>
           </div>
         </div>

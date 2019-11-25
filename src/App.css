@@ -1,57 +1,41 @@
-.App {
-  background-color:#000000;
+body {
+  background: url("bgimage.png");
+}
+
+.app{
   min-height: 100vh;
 }
 
-.red{
-  background-color:red;
+.container{
+  padding-left: 0px;
+  padding-right: 0px;
+  max-width : 95%;
 }
 
-.pink{
-  background-color:pink;
+.row{
+  min-height: 100vh;
 }
 
+.sblock 
+{
+  height: 100%;;
+}
 
-.card {
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  -webkit-transition: -webkit-transform 1s;
-  -moz-transition: -moz-transform 1s;
-  -o-transition: -o-transform 1s;
-  transition: transform 1s;
-  -webkit-transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-  -o-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  -webkit-transform-origin: 50% 50%;
+.flipblock{
+  height: 160px;
+  min-width: 160px;
+  max-width: 160px;
+  border-color: black;
+  border: 1px solid #FFF;
+  margin: 5px;
+  margin-right: 10px;
+  margin-left: 10px;
+  border-radius: 6px;
 }
-.card div {
-  display: block;
-  height: 100px;
-  width: 100px;
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  position: absolute;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-.card .front {
-background: red;
-}
-.card .back {
-  background: blue;
-  -webkit-transform: rotateY( 180deg );
-  -moz-transform: rotateY( 180deg );
-  -o-transform: rotateY( 180deg );
-  transform: rotateY( 180deg );
-}
-.card.flipped {
-  -webkit-transform: rotateY( 180deg );
-  -moz-transform: rotateY( 180deg );
-  -o-transform: rotateY( 180deg );
-  transform: rotateY( 180deg );
+
+.contentBox{
+  max-width: 1200px;
+  /* background-color:#2f3360; */
+  margin: 2%;
+  border-radius: 5px;
 }
