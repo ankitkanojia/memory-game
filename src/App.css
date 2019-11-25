@@ -70,6 +70,10 @@ body {
 }
 
 
+.flip-box:hover{
+  cursor: pointer;
+}
+
 .flip-box {
   background-color: transparent;
   height: 160px;
