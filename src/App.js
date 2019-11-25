@@ -6,7 +6,20 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isFliped : false
     };
+  }
+
+  flip = () => {
+    this.setState({
+      isFliped : true
+    }, () => {
+      setTimeout(() => {
+        this.setState({
+          isFliped: false
+        });
+      }, 3000);
+    });
   }
 
   render() {
@@ -16,7 +29,7 @@ class App extends React.Component {
           <div class="row">
             <div class="col-md-8 red">
               <section class="container">
-                <div className="card">
+                <div onClick={this.flip} class={"card" + (this.state.isFliped ? " flipped" : "")}>
                   <div class="front">&nbsp;</div>
                   <div class="back">
                     <img src={logo} alt="s" />
