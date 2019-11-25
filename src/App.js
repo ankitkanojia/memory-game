@@ -31,7 +31,16 @@ class App extends React.Component {
               <div className="row">
                 <div className="col-md-12 contentBox d-flex justify-content-center align-items-center align-content-around flex-wrap">
                   {[...Array(24)].map((data) => {
-                    return <div className="flipblock">&nbsp;</div>
+                    return  <div class="flip-box">
+                    <div class="flip-box-inner">
+                      <div class="flip-box-front">
+                        <h2>Front Side</h2>
+                      </div>
+                      <div class="flip-box-back">
+                        <img width="100%" src={note} alt="logo" />
+                      </div>
+                    </div>
+                  </div> 
                   })}
                 </div>
               </div>
