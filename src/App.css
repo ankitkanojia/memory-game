@@ -79,7 +79,8 @@ body {
   border-radius: 6px;
   min-width: 160px;
   max-width: 160px;
-  border: 1px solid #f1f1f1;
+  border: 1px solid transparent;
+  border-radius: 5px;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
@@ -94,7 +95,7 @@ body {
 }
 
 /* Do an horizontal flip when you move the mouse over the flip box container */
-.flip-box:hover .flip-box-inner {
+.flip-box.flipped .flip-box-inner {
   transform: rotateY(180deg);
 }
 
@@ -108,13 +109,22 @@ body {
 
 /* Style the front side */
 .flip-box-front {
-  background-color: #bbb;
+  background-color:#ffffff;
   color: black;
+  border-radius :5px;
 }
 
 /* Style the back side */
 .flip-box-back {
-  background-color: dodgerblue;
-  color: white;
+  background-color: #ffffff;
+  color: black;
   transform: rotateY(180deg);
+  border-radius :5px;
+  display: table;
+}
+
+.flip-box-back h2 {
+  vertical-align: middle;
+  display: table-cell;
+  font-size: 60px;
 }

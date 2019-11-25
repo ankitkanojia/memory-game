@@ -6,20 +6,65 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isFliped : false
+      allFliped: false,
+      isGameStart: false,
+      isTimerStart: false,
+      jumbeledArray: "",
+      isGameOver : false
     };
   }
 
-  flip = () => {
+  shuffle = () => {
+    var a = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz".split(""),
+      n = a.length;
+    for (var i = n - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i];
+      a[i] = a[j];
+      a[j] = tmp;
+    }
+
+    let array1 = a.join("").substring(0, 12);
+    let temparray = array1.split("");
+    for (var i = n - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = temparray[i];
+      temparray[i] = temparray[j];
+      temparray[j] = tmp;
+    }
+    let array2 = temparray.join("");
+    let finalArray = array1.concat(array2);
+    return finalArray;
+  }
+
+  componentDidMount() {
     this.setState({
-      isFliped : true
+      jumbeledArray: this.shuffle().split("")
+    });
+  }
+
+  startGame = () => {
+    this.setState({
+      isGameStart: true
+    });
+    this.allfliped();
+  }
+
+  allfliped = () => {
+    this.setState({
+      allFliped: true
     }, () => {
       setTimeout(() => {
         this.setState({
-          isFliped: false
+          allFliped: false,
+          isTimerStart : false
         });
       }, 3000);
     });
+  }
+
+  singleFliped = (index) => {
+    console.log(index);
   }
 
   render() {
@@ -30,30 +75,30 @@ class App extends React.Component {
             <div className="col-md-9">
               <div className="row">
                 <div className="col-md-12 contentBox d-flex justify-content-center align-items-center align-content-around flex-wrap">
-                  {[...Array(24)].map((data) => {
-                    return  <div class="flip-box">
-                    <div class="flip-box-inner">
-                      <div class="flip-box-front">
-                        <h2>Front Side</h2>
-                      </div>
-                      <div class="flip-box-back">
-                        <img width="100%" src={note} alt="logo" />
+                  {this.state.jumbeledArray && this.state.jumbeledArray.map((data, index) => {
+                    return <div class={"flip-box" + (this.state.allFliped ? " flipped" : "")} onClick={() => this.singleFliped(index)}>
+                      <div class="flip-box-inner">
+                        <div class="flip-box-front">
+                          <h2>&nbsp;</h2>
+                        </div>
+                        <div class="flip-box-back">
+                          <h2>{data}</h2>
+                        </div>
                       </div>
                     </div>
-                  </div> 
                   })}
                 </div>
               </div>
             </div>
-            <div className="col-md-3 text-center">  
+            <div className="col-md-3 text-center">
               <div className="row d-flex justify-content-center align-items-center text-white">
                 <div className="col-md-12 ">
-                  <img width="100%" src={note} alt="notes" /> 
+                  <img width="100%" src={note} alt="notes" />
                   <br />
                   <br />
-                  <p><button className="gamebutton">START GAME</button></p>
-                  <p><button className="gamebutton">RESTART GAME</button></p>
-                  <p><button className="timerbutton">00 : 00</button></p>
+                  {!this.state.isGameStart && <p><button className="gamebutton" onClick={this.startGame}>START GAME</button></p>}
+                  {this.state.isGameStart && this.state.isGameOver && <p><button className="gamebutton">RESTART GAME</button></p>}
+                  {this.state.isGameStart && <p><button className="timerbutton">00 : 00</button></p>}
                 </div>
               </div>
             </div>
