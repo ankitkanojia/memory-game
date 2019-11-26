@@ -7,8 +7,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mins: "0",
-      seconds: "05",
+      mins: "2",
+      seconds: "59",
       allFliped: false,
       isGameStart: false,
       isTimerStart: false,
@@ -42,7 +42,7 @@ class App extends React.Component {
     return finalArray;
   }
 
-  componentDidMount() {
+  initializeArray = () => {
     let jumbeledArray = this.shuffle().split("");
     let jumbeledArrayUpdated = jumbeledArray.map((data,index) => {
         return {
@@ -55,6 +55,14 @@ class App extends React.Component {
     this.setState({
       jumbeledArray: jumbeledArrayUpdated
     });
+  }
+
+  componentDidMount() {
+    this.initializeArray();
+  }
+
+  reStartGame = () => {
+    window.location.reload();
   }
 
   startGame = () => {
@@ -189,7 +197,7 @@ class App extends React.Component {
                   <br />
                   <br />
                   {!this.state.isGameStart && <p><button className="gamebutton" onClick={this.startGame}>START GAME</button></p>}
-                  {this.state.isGameStart && this.state.isGameOver && this.state.isGameFinish && <p><button className="gamebutton">RESTART GAME</button></p>}
+                  {this.state.isGameStart && this.state.isGameOver && this.state.isGameFinish && <p><button  onClick={this.reStartGame} className="gamebutton">RESTART GAME</button></p>}
                   {this.state.isGameStart && !this.state.isGameOver && <p><button className="timerbutton">{"0" + this.state.mins + " : " + this.state.seconds}</button></p>}
                 </div>
               </div>
