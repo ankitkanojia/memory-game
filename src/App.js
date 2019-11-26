@@ -1,13 +1,14 @@
 import React from 'react';
 import note from "./note.png";
+import gameover from "./gameover.jpg";
 import './App.css';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mins: "2",
-      seconds: "59",
+      mins: "0",
+      seconds: "05",
       allFliped: false,
       isGameStart: false,
       isTimerStart: false,
@@ -158,20 +159,27 @@ class App extends React.Component {
           <div class="row">
             <div className="col-md-9">
               <div className="row">
-                <div className="col-md-12 contentBox d-flex justify-content-center align-items-center align-content-around flex-wrap">
-                  {this.state.jumbeledArray && this.state.jumbeledArray.map((data, index) => {
-                    return <div class={"flip-box" + (this.state.allFliped && this.state.isGameStart ? " flipped" : "") + (data.ISFLIPPED  && this.state.isGameStart ? " flipped" : "")} onClick={() => this.singleFliped(index)}>
-                      <div class="flip-box-inner">
-                        <div class="flip-box-front">
-                          <h2>&nbsp;</h2>
-                        </div>
-                        <div class={"flip-box-back" + (data.ISDISABLED ? " found" : "")}>
-                          <h2>{data.CLUE}</h2>
+                {this.state.isGameOver && this.state.isGameStart &&
+                  <div className="col-md-12 contentBox d-flex justify-content-center align-items-center align-content-around flex-wrap">
+                    <img width="100%" src={gameover} alt="notes" />
+                  </div>
+                }
+                {!this.state.isGameOver && !this.state.isGameFinish &&
+                  <div className="col-md-12 contentBox d-flex justify-content-center align-items-center align-content-around flex-wrap">
+                    {this.state.jumbeledArray && this.state.jumbeledArray.map((data, index) => {
+                      return <div class={"flip-box" + (this.state.allFliped && this.state.isGameStart ? " flipped" : "") + (data.ISFLIPPED && this.state.isGameStart ? " flipped" : "")} onClick={() => this.singleFliped(index)}>
+                        <div class="flip-box-inner">
+                          <div class="flip-box-front">
+                            <h2>&nbsp;</h2>
+                          </div>
+                          <div class={"flip-box-back" + (data.ISDISABLED ? " found" : "")}>
+                            <h2>{data.CLUE}</h2>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  })}
-                </div>
+                    })}
+                  </div>
+                }
               </div>
             </div>
             <div className="col-md-3 text-center">
@@ -182,7 +190,7 @@ class App extends React.Component {
                   <br />
                   {!this.state.isGameStart && <p><button className="gamebutton" onClick={this.startGame}>START GAME</button></p>}
                   {this.state.isGameStart && this.state.isGameOver && this.state.isGameFinish && <p><button className="gamebutton">RESTART GAME</button></p>}
-                  {this.state.isGameStart && <p><button className="timerbutton">{"0" + this.state.mins + " : " + this.state.seconds}</button></p>}
+                  {this.state.isGameStart && !this.state.isGameOver && <p><button className="timerbutton">{"0" + this.state.mins + " : " + this.state.seconds}</button></p>}
                 </div>
               </div>
             </div>
